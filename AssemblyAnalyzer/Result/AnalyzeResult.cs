@@ -40,21 +40,23 @@ namespace Analyzer.Info
     {
         public string Name { get; set; }
 
-        public ICollection<TypeInfo> Types
+        public List<TypeInfo> Types
         {
-            get => _types.Values;
+            get => _types;
         }
 
-        private ConcurrentDictionary<string, TypeInfo> _types = new();
-
-        public ConcurrentDictionary<string, TypeInfo> TypesDictionary { get => _types; }
+        private List<TypeInfo> _types = new();
 
         public void AddType(Type type)
         {
-            TypeInfo t = _types.GetOrAdd(type.Name, new TypeInfo() { Name = type.Name });
-            t.Fields = new List<FieldInfo>(type.GetFields());
-            t.Properties = new List<PropertyInfo>(type.GetProperties());
+            TypeInfo t = new TypeInfo()
+            { 
+                Name = type.Name,
+                Fields = new List<FieldInfo>(type.GetFields()),
+                Properties = new List<PropertyInfo>(type.GetProperties())
+            };
             t.AddMethods(type.GetMethods());
+            _types.Add(t);
         }
     }
 

@@ -29,19 +29,19 @@ namespace AnalyzerTest
         [TestMethod]
         public void TestMethodsCount()
         {
-            Assert.AreEqual(result.NamespacesDictionary["Namespace2"].TypesDictionary["ClassB"].Methods.Count, 6);
+            Assert.AreEqual(result.NamespacesDictionary["Namespace2"].Types[0].Methods.Count, 6);
         }
 
         [TestMethod]
         public void TestFieldsCount()
         {
-            Assert.AreEqual(result.NamespacesDictionary["Namespace2"].TypesDictionary["ClassB"].Fields.Count, 2);
+            Assert.AreEqual(result.NamespacesDictionary["Namespace2"].Types[0].Fields.Count, 2);
         }
 
         [TestMethod]
         public void TestProperiesCount()
         {
-            Assert.AreEqual(result.NamespacesDictionary["Namespace2"].TypesDictionary["ClassB"].Properties.Count, 0);
+            Assert.AreEqual(result.NamespacesDictionary["Namespace2"].Types[0].Properties.Count, 0);
         }
     }
 }
