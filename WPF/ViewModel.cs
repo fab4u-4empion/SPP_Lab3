@@ -61,10 +61,16 @@ namespace WPF
             var isOpen = openFileDialog.ShowDialog();
             if (isOpen != null && isOpen.Value)
             {
-                AssemblyList = new List<AssemblyViewModel>(AssemblyList)
+                try {
+                    AssemblyList = new List<AssemblyViewModel>(AssemblyList)
+                    {
+                        new AssemblyViewModel(AssemblyAnalyzer.Analyze(openFileDialog.FileName))
+                    };
+                } 
+                catch
                 {
-                    new AssemblyViewModel(AssemblyAnalyzer.Analyze(openFileDialog.FileName))
-                };
+                    System.Windows.MessageBox.Show("Error while processing selected assembly");
+                }
             }
             else
             {
